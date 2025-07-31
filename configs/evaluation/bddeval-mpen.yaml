@@ -1,0 +1,35 @@
+_BASE_: "../Guassian-RCNN-VGG.yaml"
+MODEL:
+  BACKBONE:
+    NAME: "build_vgg_backbone_dynamic"
+    FREEZE_AT: 5
+  ROI_HEADS:
+    NUM_CLASSES: 8 
+  TEACHER_TRAINER: "sourceonly"
+  STUDENT_TRAINER: "sourceonly"
+
+  # 控制tp_fp_fn數量、bbox存取，若SAVE_TP_FP_FN = false，則STORE_TP_FP_FN_PATH_NAME可以不用設定
+  SAVE_TP_FP_FN: True
+  # 存取bbox及tp_fp_fn數量的主路徑
+  # STORE_TP_FP_FN_ROOT_PATH: "./draw_tp_fp_bbox/bdd_eval/"
+  # 取名 ex. FedMA_tp_fp_fn，則會主動儲存FedMA_tp_fp_fn_bbox.txt及FedMA_tp_fp_fn_count.txt在主路徑底下
+  STORE_TP_FP_FN_FILE_NAME: "FL_tp_fp_fn"
+  # 選擇存取哪種閾值的bbox及tp_fp_fn數量 ex. 50,55,60,65,70,75,80,85,90,95 十選一
+  EVAL_OVTHRESH: 75
+
+FEDSET:
+  DYNAMIC: True
+DATALOADER:
+  NUM_WORKERS: 2
+DATASETS:
+  TEST: ("VOC2007_bddval8",)
+TEST:
+  EVAL_PERIOD: 400
+  EVALUATOR: "VOCeval"
+UNSUPNET:
+  Trainer: "FLtrainer"
+INPUT:
+  MIN_SIZE_TRAIN: (600, )
+  MIN_SIZE_TEST: 600
+  RANDOM_FLIP: "horizontal"
+#OUTPUT_DIR: "./draw_tp_fp_bbox/bdd_veal/run_bdd_eval/"
