@@ -1,39 +1,42 @@
 # eval_detectron2
 
-本資料夾提供 Detectron2 物件偵測模型的自動化驗證與分析最小專案，方便快速複製、驗證與分析。
+* 本資料夾提供 Detectron2 物件偵測模型的自動化驗證與分析最小專案，方便快速複製、驗證與分析。
+* configs/中的 eval.yaml 是客製化 fedcoin 專案
 
-## 程式特色
-```
-* 改編自 https://github.com/ccuvislab/draw_tp_fp_bbox?tab=readme-ov-file
-* 自動掃描權重檔，建立相對應的資料夾，並加入 tp, fp, fn 的座標與標籤，使用 json 格式
-* eval1.py 預設使用 GPU，並將比對結構從 list 改成 set 以提升效能（原 bdd val 一個模型需 4 小時可減至 30 分鐘內）
-* analy2.py 以 eval1.py 輸出為基礎，支援三種分析模式：
-   * auto  : 每個模型以分數最高的 10 張圖畫圖，並產生統計 csv 與長條圖
-   * image : 針對特定一張圖，畫出所有模型
-   * score : 每 row 為驗證集 jpg，column 為所有模型權重的分數
-```
+## 安裝
+* 需能順利運行 detectron2 
 
-## 注意事項
-```
-* 預設使用 eval_1_draw_bbox 與 eval_2_result 資料夾，若已存在則會覆寫，請自行備份
-* 每次執行會掃描 weights 內全部權重，不會比對前次差異
-```
+* 請將以下程式，放到 detectron2/ 下的對應目錄下
 
-## 專案結構
 ```
 eval_detectron2/
 ├── eval1.py                # 自動化驗證主程式
 ├── analy2.py               # 分析與可視化主程式
+├── pt/
+│   └── engine/
+│       └── train_net_multiTeacher.py  # Detectron2 主要驗證主程式
 ├── configs/
 │   └── evaluation/
-│       ├── <config1>.yaml  # 驗證用 Detectron2 設定檔
-│       └── <config2>.yaml
+│       ├── bddeval.yaml  
+│       └── cityeval.yaml
+├── weights/  # 將權重檔放於此
+```
+
+* 將detectron2訓練的權重檔，放到 ./weights/ 目錄下 
+
+* 需準備資料集於專案內，本範例為 data/VOC2007_cityval/JPEGImages/ 可針對環境自行指定
+
+* 程式執行完後，將產生
+```
+./eval_1_draw_bbox/...    # eval1.py 的 output 亦為 analy2.py 的 input
+./eval_2_result/...       # analy2.py 的 output
 ```
 
 ## 各檔案用途
 - `eval1.py`：批次執行 Detectron2 驗證，產生標註與統計結果
 - `analy2.py`：分析 `eval1.py` 產生的結果，支援 auto/image/score 三種模式
 - `configs/evaluation/*.yaml`：驗證用 Detectron2 設定檔
+- `pt/engine/train_net_multiTeacher.py` : 覆寫 detectron2 的驗證程式碼，
 
 ## 分數計算方式
 每張圖片分數計算方式：
@@ -98,3 +101,19 @@ python analy2.py --mode score
 
   ![](pics/7ana2_results.png)
 
+## 程式特色
+```
+* 改編自 https://github.com/ccuvislab/draw_tp_fp_bbox?tab=readme-ov-file
+* 自動掃描權重檔，建立相對應的資料夾，並加入 tp, fp, fn 的座標與標籤，使用 json 格式
+* eval1.py 預設使用 GPU，並將比對結構從 list 改成 set 以提升效能（原 bdd val 一個模型需 4 小時可減至 30 分鐘內）
+* analy2.py 以 eval1.py 輸出為基礎，支援三種分析模式：
+   * auto  : 每個模型以分數最高的 10 張圖畫圖，並產生統計 csv 與長條圖
+   * image : 針對特定一張圖，畫出所有模型
+   * score : 每 row 為驗證集 jpg，column 為所有模型權重的分數
+```
+
+## 注意事項
+```
+* 預設使用 eval_1_draw_bbox 與 eval_2_result 資料夾，若已存在則會覆寫，請自行備份
+* 每次執行會掃描 weights 內全部權重，不會比對前次差異
+```
