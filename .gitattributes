@@ -1,0 +1,1 @@
+eval_detectron2_sample.zip filter=lfs diff=lfs merge=lfs -text
