@@ -88,11 +88,11 @@ python analy2.py --mode score
 
 - **ana2_image_final.png**：analy2.py image 模式，針對單張圖片產生所有模型標註。
 
-  ![](pics/5ana2_image_final.png)
+  ![](pics/6ana2_image_final.png)
 
 - **ana2_score.png**：analy2.py score 模式，產生所有模型在所有圖片上的分數矩陣。
 
-  ![](pics/6ana2_score.png)
+  ![](pics/5ana2_score.png)
 
 - **ana2_results.png**：analy2.py 執行後，產生的分析結果總覽。
 
