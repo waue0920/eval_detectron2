@@ -72,29 +72,29 @@ python analy2.py --mode score
 
 - **weights.png**：權重檔案放置於 weights/ 目錄，供 eval1.py 自動掃描。
 
-  ![](pics/weights.png)
+  ![](pics/1weights.png)
 
 - **eval1_final.png**：eval1.py 執行過程，會自動建立模型資料夾並產生對應結果。
 
-  ![](pics/eval1_final.png)
+  ![](pics/2eval1_final.png)
 
 - **eval1_results.png**：eval1.py 執行完畢後，產生的主資料夾結構與結果檔案。
 
-  ![](pics/eval1_results.png)
+  ![](pics/3eval1_results.png)
 
 - **ana2_auto_final.png**：analy2.py auto 模式，產生分數最高 Top-10 標註圖。
 
-  ![](pics/ana2_auto_final.png)
+  ![](pics/4ana2_auto_final.png)
 
 - **ana2_image_final.png**：analy2.py image 模式，針對單張圖片產生所有模型標註。
 
-  ![](pics/ana2_image_final.png)
+  ![](pics/5ana2_image_final.png)
 
 - **ana2_score.png**：analy2.py score 模式，產生所有模型在所有圖片上的分數矩陣。
 
-  ![](pics/ana2_score.png)
+  ![](pics/6ana2_score.png)
 
 - **ana2_results.png**：analy2.py 執行後，產生的分析結果總覽。
 
-  ![](pics/ana2_results.png)
+  ![](pics/7ana2_results.png)
 
