@@ -1,6 +1,6 @@
 # eval_detectron2
 
-* 本資料夾提供 Detectron2 物件偵測模型的自動化驗證與分析最小專案，方便快速複製、驗證與分析。
+* 本專案參考自 [ccuvislab draw_tp_fp_bbox](https://github.com/ccuvislab/draw_tp_fp_bbox)，用來提供 Detectron2 物件偵測模型的自動化驗證與分析最小專案，方便快速複製、驗證與分析。
 * configs/中的 eval.yaml 是客製化 fedcoin 專案
 
   ![](pics/0bdd.png)
