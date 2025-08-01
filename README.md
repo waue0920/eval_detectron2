@@ -32,21 +32,21 @@ eval_detectron2/
 ./eval_2_result/...       # analy2.py 的 output
 ```
 
-## 各檔案用途
+### 各檔案用途
 - `eval1.py`：批次執行 Detectron2 驗證，產生標註與統計結果
 - `analy2.py`：分析 `eval1.py` 產生的結果，支援 auto/image/score 三種模式
 - `configs/evaluation/*.yaml`：驗證用 Detectron2 設定檔
 - `pt/engine/train_net_multiTeacher.py` : 覆寫 detectron2 的驗證程式碼，
 
-## 分數計算方式
+### 分數計算方式
 每張圖片分數計算方式：
 ```
 tp_num*100 - fn_num*1 - fp_num*0
 ```
 
-## 基本操作流程
+## 操作案例
 
-### skf2c
+### 驗證 cityscape 模型
 ```bash
 # 0. 將所有需要評估的 skf2c*.pth 放到 ./weights/
 # 1. 執行驗證
@@ -57,7 +57,7 @@ python analy2.py --mode image --dataset-path data/VOC2007_cityval/JPEGImages/ --
 python analy2.py --mode score
 ```
 
-### ck2b
+### 驗證 bdd 模型
 ```bash
 # 0. 將所有需要評估的 ck2b*.pth 放到 ./weights/
 # 1. 執行驗證
@@ -69,6 +69,13 @@ python analy2.py --mode score
 ```
 
 ---
+
+## 執行結果
+
+* 若想快速瀏覽本專案的分析成果，可下載範例結果：
+  [eval_detectron2_sample.zip](https://github.com/waue0920/eval_detectron2/releases/download/sample/eval_detectron2_sample.zip)
+  （內含 output 資料夾與分析結果，供參考）
+
 
 ### snapshot
 
